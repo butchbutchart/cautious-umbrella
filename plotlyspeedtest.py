@@ -47,9 +47,9 @@ def save_to_file(test_results, date_time):
 
 
 def update_chart(test_results, date_time):
-    username ="chrisbutchart"
-    api_key ="O226qvTKmWeQmd5WKcmS"
-    py.sign_in(chrisbutchart, O226qvTKmWeQmd5WKcmS)
+    username = 'chrisbutchart'
+    api_key = 'O226qvTKmWeQmd5WKcmS'
+    py.sign_in(username, api_key)
     data = []
 
     for item in test_results:
