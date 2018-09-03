@@ -10,7 +10,7 @@ import subprocess
 
 def main():
     date_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    speedtest_cmd = "/usr/local/bin/speedtest-cli --simple --server 8066"
+    speedtest_cmd = "speedtest-cli --simple"
     process = subprocess.Popen(speedtest_cmd.split(), stdout=subprocess.PIPE)
     process_output = process.communicate()[0]
     speedtest_output = process_output.split()
@@ -47,13 +47,16 @@ def save_to_file(test_results, date_time):
 
 
 def update_chart(test_results, date_time):
-    username = 'chrisbutchart'
-    api_key = 'O226qvTKmWeQmd5WKcmS'
+    #username = os.environ['PLOTLY_USERNAME']
+    #api_key = os.environ['PLOTLY_API_KEY']
+    username = ''
+    api_key = ''
     py.sign_in(username, api_key)
     data = []
 
     for item in test_results:
         """Choose a different marker depending on the statistic.
+
         This is to make everything easier to see."""
         if item["statistic"] == "Upload":
             marker_style = "lines"
@@ -76,10 +79,10 @@ def update_chart(test_results, date_time):
 
     py.plot(
         data,
-        filename="utils/broadband-speed",
+        filename="broadband-speed-temp",
         fileopt="extend",
         sharing="public",
-        auto_open=False
+        auto_open=True
     )
 
 
